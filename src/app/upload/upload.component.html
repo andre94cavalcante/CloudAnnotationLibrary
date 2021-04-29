@@ -1,0 +1,33 @@
+<div class="mainContainer">
+  <div class="row margin25">
+    <div class="col-md-4">
+      <div class="formBox">
+        <input class="uploadText" placeholder="Nome do Caderno" type='text' [(ngModel)]="notebook.projectName">
+        <input class="uploadText" placeholder="Disciplina" type='text' [(ngModel)]="notebook.subject">
+        <input class="uploadText" placeholder="Tags" type='text' [(ngModel)]="tagsToSlice">
+        <input id="upload-photo" type="file" name="image" ng2FileSelect [uploader]="uploader"
+          accept="image/x-png,image/gif,image/jpeg" />
+        <label class="input-group-text upload" for="upload-photo">Buscar Imagens</label>
+        <div class="filesQueued" id="queue">
+          <p class='queueLengthMsg' (click)="showQueue()" *ngIf="fileQueue">+ {{ fileQueue.length }} Imagem(ns)
+            adicionada(s)</p>
+          <div class="namesFilesQueued" id="namesFiles">
+            <li class="file" *ngFor="let file of fileQueue;">
+              - {{ file }}
+            </li>
+          </div>
+        </div>
+        <!-- <button class="input-group-text upload" type="button" (click)="filesUploaded()"
+          [disabled]="!uploader.getNotUploadedItems().length">
+          Upload
+        </button> -->
+        <button class="input-group-text upload" type="button" (click)="updateFilesAndInfo()">
+          Enviar
+        </button>
+        <button class="input-group-text upload" type="button" (click)="findNotebookName()">
+          Find
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
