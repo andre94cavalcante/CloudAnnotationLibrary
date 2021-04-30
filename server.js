@@ -1,25 +1,63 @@
+// const http = require('http')
+// const express = require('express');
+// const path = require('path');
+// // const app = require('./backend/api/app')
+// const nomeApp = process.env.npm_package_name;
+
+// // Create PORT
+// const port = process.env.PORT || 5000
+
+// const app = express();
+
+// app.set('port', port)
+// const server = http.createServer(app)
+
+// // Heroku settings
+
+// app.use(express.static(`${__dirname}/dist/${nomeApp}`));
+
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(`${__dirname}/dist/${nomeApp}/index.html`));
+// });
+
+// app.listen(port, () => console.log('Server started on 5000'))
+
+// module.exports = app
+
+
 const http = require('http')
 const express = require('express');
 const path = require('path');
-// const app = require('./backend/api/app')
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const imageUploader = require('./backend/api/imageUploader');
+const infoUploader = require('./backend/api/infoUploader');
+const api = require('./backend/api/app')
+
 const nomeApp = process.env.npm_package_name;
 
-// Create PORT
-const port = process.env.PORT || 5000
-
 const app = express();
+app.use(bodyParser.json());
 
-app.set('port', port)
-const server = http.createServer(app)
+const port = process.env.PORT || 5000;
 
-// Heroku settings
+const corsOptions = {
+  origin: 'http://localhost:' + port,
+}
 
-app.use(express.static(`${__dirname}/dist/${nomeApp}`));
+app.use(cors(corsOptions));
+
+// app.get('/api/courses', getCoursesList);
+// app.get('/api/course/:id', getCourseInfo);
+// app.post('/api/login', login);
+
+api(app)
+
+app.use(express.static(`${__dirname}/dist/angular-node-file-upload`));
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/dist/${nomeApp}/index.html`));
+  res.sendFile(path.join(`${__dirname}/dist/angular-node-file-upload/index.html`));
 });
 
-app.listen(port, () => console.log('Server started on 5000'))
-
-module.exports = app
+app.listen(port, () => console.log(`Server is listening on port ${port}!`));
