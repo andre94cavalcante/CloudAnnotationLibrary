@@ -3,14 +3,15 @@ const express = require('express'),
   cors = require('cors'),
   multer = require('multer'),
   bodyParser = require('body-parser');
-const app = require('../server')
+// const app = require('../server')
+const nomeApp = process.env.npm_package_name;
 const imageUploader = require('./imageUploader');
 const infoUploader = require('./infoUploader');
 
 //--------------------------------------------------------------------------------------------------------
 
 // Express settings
-// const app = express();
+const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -24,6 +25,16 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
   next()
 })
+
+//--------------------------------------------------------------------------------------------------------
+
+// Heroku settings
+
+app.use(express.static(`${__dirname}/dist/${nomeApp}`));
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/dist/${nomeApp}/index.html`));
+});
 
 //--------------------------------------------------------------------------------------------------------
 
@@ -68,4 +79,4 @@ app.use((err, req, res, next) => {
 
 //--------------------------------------------------------------------------------------------------------
 
-// module.exports = app
+module.exports = app
