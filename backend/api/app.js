@@ -3,13 +3,14 @@ const express = require('express'),
   cors = require('cors'),
   multer = require('multer'),
   bodyParser = require('body-parser');
+const app = require('../server')
 const imageUploader = require('./imageUploader');
 const infoUploader = require('./infoUploader');
 
 //--------------------------------------------------------------------------------------------------------
 
 // Express settings
-const app = express();
+// const app = express();
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -67,4 +68,4 @@ app.use((err, req, res, next) => {
 
 //--------------------------------------------------------------------------------------------------------
 
-module.exports = app
+// module.exports = app
