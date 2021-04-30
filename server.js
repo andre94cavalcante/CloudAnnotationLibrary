@@ -48,6 +48,8 @@ const port = process.env.PORT || 5000;
 
 // app.use(cors(corsOptions));
 
+console.log('1')
+
 api(app)
 
 app.use(express.static(`${__dirname}/dist/angular-node-file-upload`));
