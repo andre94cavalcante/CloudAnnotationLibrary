@@ -9,6 +9,7 @@
 
 # dependencies
 /backend/uploads
+/backend/node_modules
 /node_modules
 
 # profiling files
