@@ -1,13 +1,13 @@
 const http = require('http')
 const express = require('express');
 const path = require('path');
-const app = require('./backend/api/app')
+// const app = require('./backend/api/app')
 const nomeApp = process.env.npm_package_name;
 
 // Create PORT
 const port = process.env.PORT || 5000
 
-// const app = express();
+const app = express();
 
 app.set('port', port)
 const server = http.createServer(app)
@@ -22,4 +22,4 @@ app.get('/*', (req, res) => {
 
 app.listen(port, () => console.log('Server started on 5000'))
 
-// module.exports = app
+module.exports = app
