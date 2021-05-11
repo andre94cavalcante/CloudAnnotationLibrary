@@ -37,7 +37,7 @@ let storage = multer.diskStorage({
       console.log('counter: ', counter)
       let pageNum = fileInfo.numPages + counter
       cb(null, fileInfo.idNotebook + '-' + pageNum + extension)
-    }, 100)
+    }, 200)
   }
 });
 

@@ -11,11 +11,16 @@ const {
 
 mongoose.set('useFindAndModify', false);
 
-mongoose.connect('mongodb://127.0.0.1:27017/tcc', {
+mongoose.connect('mongodb+srv://eu:tycbpOzsxq8BpLzl@noteslibrary.9qkuq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
 })
+// mongoose.connect('mongodb://127.0.0.1:27017/tcc', {
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useUnifiedTopology: true
+// })
 
 const Notebook = mongoose.model('notebook', {
   projectName: {
