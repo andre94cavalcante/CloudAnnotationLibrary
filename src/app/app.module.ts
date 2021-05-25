@@ -20,7 +20,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './login-screen/auth.service';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginScreenComponent },
+  { path: '', component: LoginScreenComponent },
   { path: 'home', component: HomeComponent },
   { path: 'user', component: UserComponent },
   { path: 'search', component: SearchComponent },
