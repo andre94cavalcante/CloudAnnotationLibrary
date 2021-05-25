@@ -11,7 +11,7 @@ const {
 
 mongoose.set('useFindAndModify', false);
 
-mongoose.connect('mongodb+srv://eu:tycbpOzsxq8BpLzl@noteslibrary.9qkuq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://eu:tycbpOzsxq8BpLzl@noteslibrary.9qkuq.mongodb.net/tcc?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
@@ -72,8 +72,48 @@ async function updatePages(info) {
   })
 }
 
+const User = mongoose.model('user', {
+  name: {
+    type: String
+  },
+  password: {
+    type: String
+  },
+  email: {
+    type: String
+  },
+  url: {
+    type: Number
+  },
+  isAdmin: {
+    type: Boolean
+  },
+  follow: [],
+})
+
+async function matchUserInfo(info) {
+  const user = await User.find({
+    email: info.email
+  }).then()
+  if (user.length >= 1) {
+    console.log('Found email in the DB:')
+    console.log(user[0])
+    if (user[0].password === info.password) {
+      console.log('Login Successful')
+      return user[0]._id
+    } else {
+      console.log('Wrong Password')
+      return false
+    }
+  } else {
+    console.log('Unregistered')
+    return false
+  }
+}
+
 module.exports = {
   newNotebook: newNotebook,
   findNotebook: findNotebook,
-  updatePages: updatePages
+  updatePages: updatePages,
+  matchUserInfo: matchUserInfo,
 }

@@ -42,13 +42,7 @@ app.use(bodyParser.json());
 
 const port = process.env.PORT || 5000;
 
-// const corsOptions = {
-//   origin: 'http://localhost:' + port,
-// }
-
 app.use(cors());
-
-console.log('1')
 
 api(app)
 

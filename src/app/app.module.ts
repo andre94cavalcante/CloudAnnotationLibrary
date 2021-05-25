@@ -15,9 +15,13 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { SearchComponent } from './search/search.component';
 import { NotificationsComponent } from './notifications/notifications.component';
+import { LoginScreenComponent } from './login-screen/login-screen.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthService } from './login-screen/auth.service';
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginScreenComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'user', component: UserComponent },
   { path: 'search', component: SearchComponent },
   { path: 'notifications', component: NotificationsComponent },
@@ -32,6 +36,7 @@ const appRoutes: Routes = [
     UserComponent,
     SearchComponent,
     NotificationsComponent,
+    LoginScreenComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,8 +47,9 @@ const appRoutes: Routes = [
     FileUploadModule,
     RouterModule.forRoot(appRoutes),
     HttpClientModule,
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

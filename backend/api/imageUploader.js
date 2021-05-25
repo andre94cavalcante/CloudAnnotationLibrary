@@ -1,11 +1,18 @@
-const express = require('express'),
-  cors = require('cors'),
-  multer = require('multer'),
-  bodyParser = require('body-parser');
-const {
-  consoleTestResultHandler
-} = require('tslint/lib/test');
+const multer = require('multer'),
+  bodyparser = require('body-parser'),
+  fs = require('fs'),
+  AWS = require('aws-sdk'),
+  multerS3 = require('multer-s3')
 const mongoose = require('../mongoDB/mongoose');
+
+// AWS Info
+AWS.config.update({
+  secretAccessKey: '969xJIaE0Guq/2OEIzGErbNu48ACH2eO3JeexOtW',
+  accessKeyId: 'AKIASSPS6G6CMZNR2MOL',
+  region: 'sa-east-1'
+});
+S3_BUCKET = 'andre-tcc'
+const s3 = new AWS.S3();
 
 // File upload settings
 const path = process.env.HOME + '/Programming/TCC/Actual/backend/uploads';
@@ -22,29 +29,43 @@ const getIdNotebook = (id, pages, queue) => {
   fileInfo.tempQueue = queue
 }
 
-let counter = 0
-let storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path);
-  },
-  filename: (req, file, cb) => {
-    let extension = '.' + file.originalname.split('.').pop()
-    if (extension === '.jpeg') {
-      extension = '.jpg'
-    }
-    setTimeout(() => {
-      counter++
-      console.log('counter: ', counter)
-      let pageNum = fileInfo.numPages + counter
-      cb(null, fileInfo.idNotebook + '-' + pageNum + extension)
-    }, 200)
+const fileNameFunc = (file) => {
+  let extension = file.originalname.split('.').pop()
+  if (extension === 'jpeg') {
+    extension = 'jpg'
   }
+  let counter = 0
+  counter++
+  // console.log('counter: ', counter)
+  let pageNum = fileInfo.numPages + counter
+  const fileName = fileInfo.idNotebook + '-' + pageNum + '.' + extension
+  return fileName
+}
+
+let uploadLocal = multer({
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, path);
+    },
+    filename: (req, file, cb) => {
+      setTimeout(() => {
+        cb(null, fileNameFunc(file))
+      }, 500)
+    }
+  })
 });
 
-let upload = multer({
-  storage: storage
+let uploadAWS = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: S3_BUCKET,
+    key: function (req, file, cb) {
+      setTimeout(() => {
+        cb(null, fileNameFunc(file))
+      }, 500)
+    }
+  })
 });
-
 
 const fileCatcher = (res) => {
   res.end('File catcher')
@@ -66,7 +87,8 @@ const imageUpload = (req, res) => {
 }
 
 module.exports = {
-  upload: upload,
+  uploadLocal: uploadLocal,
+  uploadAWS: uploadAWS,
   fileCatcher: fileCatcher,
   imageUpload: imageUpload,
   getIdNotebook: getIdNotebook

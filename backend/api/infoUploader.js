@@ -31,9 +31,9 @@ async function seeIfExists(req) {
 }
 
 async function quantityOfPagesToDB(queue, note) {
-  console.log(note.pages)
+  // console.log(note.pages)
   note.pages += queue
-  console.log(note.pages)
+  // console.log(note.pages)
   mongoose.updatePages(note)
   return note.pages
 }

@@ -83,6 +83,7 @@
 
 const imageUploader = require('./imageUploader');
 const infoUploader = require('./infoUploader');
+const login = require('./login');
 
 
 module.exports = (app) => {
@@ -92,13 +93,23 @@ module.exports = (app) => {
   });
 
   // POST Image File
-  app.post('/api/imgUpload', imageUploader.upload.single('image'), function (req, res) {
+  // app.post('/api/imgUpload', imageUploader.uploadLocal.single('image'), function (req, res, next) {
+  //   // imageUploader.imageUpload(req, res);
+  //   // next()
+  // });
+
+  app.post('/api/imgUpload', imageUploader.uploadAWS.single('image'), function (req, res, next) {
     imageUploader.imageUpload(req, res);
   });
 
   // Upload Info Notebook
   app.post('/api/infoUpload', (req, res, next) => {
     infoUploader.getInfo(req, res)
-    // next()
   });
+
+  // Get Login Info
+  app.post('/api/users', (req, res) => {
+    login.fetchUserInfo(req, res)
+  });
+
 }
