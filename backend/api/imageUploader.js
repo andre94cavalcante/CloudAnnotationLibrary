@@ -7,8 +7,8 @@ const mongoose = require('../mongoDB/mongoose');
 
 // AWS Info
 AWS.config.update({
-  secretAccessKey: '969xJIaE0Guq/2OEIzGErbNu48ACH2eO3JeexOtW',
-  accessKeyId: 'AKIASSPS6G6CMZNR2MOL',
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   region: 'sa-east-1'
 });
 S3_BUCKET = 'andre-tcc'
