@@ -83,8 +83,6 @@
 
 const imageUploader = require('./imageUploader');
 const infoUploader = require('./infoUploader');
-const login = require('./login');
-
 
 module.exports = (app) => {
   // Image Upload Functions

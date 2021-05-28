@@ -8,10 +8,11 @@ const {
 const {
   find
 } = require('tslint/lib/utils')
+const config = require('../api/config')
 
 mongoose.set('useFindAndModify', false);
 
-mongoose.connect('mongodb+srv://eu:tycbpOzsxq8BpLzl@noteslibrary.9qkuq.mongodb.net/tcc?retryWrites=true&w=majority', {
+mongoose.connect(config.MONGO_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true

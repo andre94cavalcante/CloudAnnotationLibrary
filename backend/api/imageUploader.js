@@ -4,14 +4,16 @@ const multer = require('multer'),
   AWS = require('aws-sdk'),
   multerS3 = require('multer-s3')
 const mongoose = require('../mongoDB/mongoose');
+const configAWS = require('./config')
 
 // AWS Info
 AWS.config.update({
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  region: 'sa-east-1'
+  secretAccessKey: 'LzNevYL59bBx9MwQ5/tqu/qPWuMT0z7SfO4LG7cj',
+  accessKeyId: 'AKIASSPS6G6CE37HZ62H',
+  region: configAWS.AWS_DEFAULT_REGION
 });
-S3_BUCKET = 'andre-tcc'
+
+S3_BUCKET = configAWS.BUCKET_NAME
 const s3 = new AWS.S3();
 
 // File upload settings
