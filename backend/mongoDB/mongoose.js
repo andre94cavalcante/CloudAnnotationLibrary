@@ -17,11 +17,6 @@ mongoose.connect(config.MONGO_URL, {
   useCreateIndex: true,
   useUnifiedTopology: true
 })
-// mongoose.connect('mongodb://127.0.0.1:27017/tcc', {
-//   useNewUrlParser: true,
-//   useCreateIndex: true,
-//   useUnifiedTopology: true
-// })
 
 const Notebook = mongoose.model('notebook', {
   projectName: {

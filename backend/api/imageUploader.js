@@ -1,9 +1,9 @@
 const multer = require('multer'),
   bodyparser = require('body-parser'),
-  fs = require('fs'),
-  // AWS = require('aws-sdk'),
-  multerS3 = require('multer-s3')
-const mongoose = require('../mongoDB/mongoose');
+  fs = require('fs')
+// AWS = require('aws-sdk'),
+// multerS3 = require('multer-s3')
+const mongoose = require('../mongoDB/mongoose')
 const configAWS = require('./config')
 
 // AWS Info
