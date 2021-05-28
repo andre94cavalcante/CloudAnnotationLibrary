@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~11.1.2",
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
+    "aws-sdk": "^2.918.0",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
