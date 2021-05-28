@@ -91,14 +91,13 @@ module.exports = (app) => {
   });
 
   // POST Image File
-  // app.post('/api/imgUpload', imageUploader.uploadLocal.single('image'), function (req, res, next) {
-  //   // imageUploader.imageUpload(req, res);
-  //   // next()
-  // });
-
-  app.post('/api/imgUpload', imageUploader.uploadAWS.single('image'), function (req, res, next) {
+  app.post('/api/imgUpload', imageUploader.uploadLocal.single('image'), function (req, res) {
     imageUploader.imageUpload(req, res);
   });
+
+  // app.post('/api/imgUpload', imageUploader.uploadAWS.single('image'), function (req, res) {
+  //   imageUploader.imageUpload(req, res);
+  // });
 
   // Upload Info Notebook
   app.post('/api/infoUpload', (req, res, next) => {
