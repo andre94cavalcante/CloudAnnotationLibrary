@@ -8,8 +8,8 @@ const configAWS = require('./config')
 
 // AWS Info
 // AWS.config.update({
-//   secretAccessKey: 'LzNevYL59bBx9MwQ5/tqu/qPWuMT0z7SfO4LG7cj',
-//   accessKeyId: 'AKIASSPS6G6CE37HZ62H',
+//   secretAccessKey: configAWS.AWS_SECRET_ACCESS_KEY
+//   accessKeyId: configAWS.AWS_ACCESS_KEY
 //   region: configAWS.AWS_DEFAULT_REGION
 // });
 
