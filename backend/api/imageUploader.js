@@ -16,7 +16,7 @@ AWS.config.update({
 S3_BUCKET = configAWS.BUCKET_NAME
 const s3 = new AWS.S3();
 
-console.log('vars', configAWS.BUCKET_NAME, configAWS.AWS_DEFAULT_REGION, configAWS.AWS_ACCESS_KEY, configAWS.AWS_SECRET_ACCESS_KEY, config.MONGO_URL)
+console.log('vars', configAWS.BUCKET_NAME, configAWS.AWS_DEFAULT_REGION, configAWS.AWS_ACCESS_KEY, configAWS.AWS_SECRET_ACCESS_KEY, configAWS.MONGO_URL)
 // File upload settings
 const path = process.env.HOME + '/Programming/TCC/Actual/backend/uploads';
 
