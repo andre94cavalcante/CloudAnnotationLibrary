@@ -1,20 +1,20 @@
 const multer = require('multer'),
   bodyparser = require('body-parser'),
-  fs = require('fs'),
-  AWS = require('aws-sdk'),
-  multerS3 = require('multer-s3')
+  fs = require('fs')
+// AWS = require('aws-sdk'),
+// multerS3 = require('multer-s3')
 const mongoose = require('../mongoDB/mongoose')
 const configAWS = require('./config')
 
 // AWS Info
-AWS.config.update({
-  secretAccessKey: configAWS.AWS_SECRET_ACCESS_KEY,
-  accessKeyId: configAWS.AWS_ACCESS_KEY,
-  region: configAWS.AWS_DEFAULT_REGION,
-});
+// AWS.config.update({
+//   secretAccessKey: configAWS.AWS_SECRET_ACCESS_KEY,
+//   accessKeyId: configAWS.AWS_ACCESS_KEY,
+//   region: configAWS.AWS_DEFAULT_REGION,
+// });
 
-S3_BUCKET = configAWS.BUCKET_NAME
-const s3 = new AWS.S3();
+// S3_BUCKET = configAWS.BUCKET_NAME
+// const s3 = new AWS.S3();
 
 // File upload settings
 const path = process.env.HOME + '/Programming/TCC/Actual/backend/uploads';
@@ -57,17 +57,17 @@ let uploadLocal = multer({
   })
 });
 
-let uploadAWS = multer({
-  storage: multerS3({
-    s3: s3,
-    bucket: S3_BUCKET,
-    key: function (req, file, cb) {
-      setTimeout(() => {
-        cb(null, fileNameFunc(file))
-      }, 500)
-    }
-  })
-});
+// let uploadAWS = multer({
+//   storage: multerS3({
+//     s3: s3,
+//     bucket: S3_BUCKET,
+//     key: function (req, file, cb) {
+//       setTimeout(() => {
+//         cb(null, fileNameFunc(file))
+//       }, 500)
+//     }
+//   })
+// });
 
 const fileCatcher = (res) => {
   res.end('File catcher')
@@ -90,7 +90,7 @@ const imageUpload = (req, res) => {
 
 module.exports = {
   uploadLocal: uploadLocal,
-  uploadAWS: uploadAWS,
+  // uploadAWS: uploadAWS,
   fileCatcher: fileCatcher,
   imageUpload: imageUpload,
   getIdNotebook: getIdNotebook
