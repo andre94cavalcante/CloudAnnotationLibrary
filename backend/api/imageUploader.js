@@ -1,5 +1,5 @@
-const multer = require('multer'),
-  bodyparser = require('body-parser'),
+// const multer = require('multer'),
+const bodyparser = require('body-parser'),
   fs = require('fs'),
   AWS = require('aws-sdk'),
   multerS3 = require('multer-s3')
