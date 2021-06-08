@@ -18,6 +18,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './login-screen/auth.service';
+import { RegisterScreenComponent } from './register-screen/register-screen.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginScreenComponent },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   { path: 'user', component: UserComponent },
   { path: 'search', component: SearchComponent },
   { path: 'notifications', component: NotificationsComponent },
+  { path: 'registration', component: RegisterScreenComponent },
 ];
 
 @NgModule({
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
     SearchComponent,
     NotificationsComponent,
     LoginScreenComponent,
+    RegisterScreenComponent,
   ],
   imports: [
     BrowserModule,

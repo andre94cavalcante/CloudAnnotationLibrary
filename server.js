@@ -30,6 +30,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const session = require('express-session')
 
 const imageUploader = require('./backend/api/imageUploader');
 const infoUploader = require('./backend/api/infoUploader');
@@ -44,6 +45,12 @@ const port = process.env.PORT || 5000;
 
 app.use(cors());
 
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: true,
+}))
+
 api(app);
 
 app.use(express.static(`${__dirname}/dist/angular-node-file-upload`));
@@ -51,5 +58,13 @@ app.use(express.static(`${__dirname}/dist/angular-node-file-upload`));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/dist/angular-node-file-upload/index.html`));
 });
+
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: true,
+}))
+
+
 
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));

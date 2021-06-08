@@ -87,6 +87,18 @@ const User = mongoose.model('user', {
   follow: [],
 })
 
+async function newUser(info) {
+  const user = await new User(info)
+  user.isAdmin = false
+  user.follow = []
+  user.save().then((user) => {
+    console.log('Created user in the DB:')
+    console.log(user)
+  }).catch((error) => {
+    console.log('Error!', error)
+  })
+}
+
 async function matchUserInfo(info) {
   const user = await User.find({
     email: info.email
@@ -99,7 +111,7 @@ async function matchUserInfo(info) {
       return user[0]._id
     } else {
       console.log('Wrong Password')
-      return false
+      return 'Worng Password'
     }
   } else {
     console.log('Unregistered')
@@ -111,5 +123,6 @@ module.exports = {
   newNotebook: newNotebook,
   findNotebook: findNotebook,
   updatePages: updatePages,
+  newUser: newUser,
   matchUserInfo: matchUserInfo,
 }

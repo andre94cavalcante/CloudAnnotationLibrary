@@ -83,6 +83,8 @@
 
 const imageUploader = require('./imageUploader');
 const infoUploader = require('./infoUploader');
+const login = require('./login');
+const register = require('./register');
 
 module.exports = (app) => {
   // Image Upload Functions
@@ -108,5 +110,16 @@ module.exports = (app) => {
   app.post('/api/users', (req, res) => {
     login.fetchUserInfo(req, res)
   });
+
+  //Express Session
+  app.get('/admin', (req, res) => {
+    req.session.login = 'akira'
+    console.log(req.session.login)
+  })
+
+  // Upload Info User
+  app.post('/api/register', (req, res) => {
+    register.createUser(req, res)
+  })
 
 }
