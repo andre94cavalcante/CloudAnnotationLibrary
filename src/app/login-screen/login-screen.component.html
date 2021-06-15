@@ -3,9 +3,10 @@
   <div class="row margin25">
     <div class="col-md-4">
       <div class="formBox">
-        <input class="uploadText" placeholder="E-mail" type='text' [(ngModel)]="user.email">
-        <input class="uploadText" placeholder="Senha" type='password' [(ngModel)]="user.password">
-        <button class="input-group-text upload" type="button" (click)='login()'>
+        <input class="uploadText" placeholder="E-mail" type='text' [(ngModel)]="user.email" autofocus>
+        <input class="uploadText" placeholder="Senha" type='password' [(ngModel)]="user.password"
+          (keydown.enter)="login()">
+        <button class="input-group-text upload" type="submit" (click)='login()'>
           Entrar
         </button>
         <button class="input-group-text upload" type="button" (click)='register()'>

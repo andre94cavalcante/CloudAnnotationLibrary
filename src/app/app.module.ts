@@ -19,6 +19,7 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './login-screen/auth.service';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
+import { ApiUsersComponent } from './api-users/api-users.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginScreenComponent },
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'registration', component: RegisterScreenComponent },
+  { path: 'api/users', component: ApiUsersComponent },
 ];
 
 @NgModule({
@@ -40,6 +42,7 @@ const appRoutes: Routes = [
     NotificationsComponent,
     LoginScreenComponent,
     RegisterScreenComponent,
+    ApiUsersComponent,
   ],
   imports: [
     BrowserModule,

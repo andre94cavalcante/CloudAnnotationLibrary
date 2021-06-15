@@ -24,47 +24,47 @@
 
 // module.exports = app
 
+const http = require("http");
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
-const http = require('http')
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const session = require('express-session')
-
-const imageUploader = require('./backend/api/imageUploader');
-const infoUploader = require('./backend/api/infoUploader');
-const api = require('./backend/api/app')
+const imageUploader = require("./backend/api/imageUploader");
+const infoUploader = require("./backend/api/infoUploader");
+const api = require("./backend/api/app");
 
 const nomeApp = process.env.npm_package_name;
 
 const app = express();
+
 app.use(bodyParser.json());
+app.use(cors());
 
 const port = process.env.PORT || 5000;
 
-app.use(cors());
-
-app.use(session({
-  secret: 'secret-key',
-  resave: false,
-  saveUninitialized: true,
-}))
+app.use(cookieParser());
+app.use(
+  session({
+    secret: "secret-key",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+      secure: false,
+    },
+  })
+);
 
 api(app);
 
 app.use(express.static(`${__dirname}/dist/angular-node-file-upload`));
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/dist/angular-node-file-upload/index.html`));
+app.get("/*", (req, res) => {
+  res.sendFile(
+    path.join(`${__dirname}/dist/angular-node-file-upload/index.html`)
+  );
 });
-
-app.use(session({
-  secret: 'secret-key',
-  resave: false,
-  saveUninitialized: true,
-}))
-
-
 
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));

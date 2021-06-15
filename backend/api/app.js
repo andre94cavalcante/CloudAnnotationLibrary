@@ -81,14 +81,16 @@
 
 // // module.exports = app
 
-const imageUploader = require('./imageUploader');
-const infoUploader = require('./infoUploader');
-const login = require('./login');
-const register = require('./register');
+const imageUploader = require("./imageUploader");
+const infoUploader = require("./infoUploader");
+const login = require("./login");
+const register = require("./register");
+
+let promiseID = "null";
 
 module.exports = (app) => {
   // Image Upload Functions
-  app.get('/api', (req, res) => {
+  app.get("/api", (req, res) => {
     imageUploader.fileCatcher(res);
   });
 
@@ -97,29 +99,35 @@ module.exports = (app) => {
   //   imageUploader.imageUpload(req, res);
   // });
 
-  app.post('/api/imgUpload', imageUploader.uploadAWS.single('image'), function (req, res) {
-    imageUploader.imageUpload(req, res);
-  });
+  app.post(
+    "/api/imgUpload",
+    imageUploader.uploadAWS.single("image"),
+    function (req, res) {
+      imageUploader.imageUpload(req, res);
+    }
+  );
 
   // Upload Info Notebook
-  app.post('/api/infoUpload', (req, res, next) => {
-    infoUploader.getInfo(req, res)
+  app.post("/api/infoUpload", (req, res, next) => {
+    infoUploader.getInfo(req, res);
   });
 
   // Get Login Info
-  app.post('/api/users', (req, res) => {
-    login.fetchUserInfo(req, res)
+  app.post("/api/users", (req, res) => {
+    promiseID = login.fetchUserInfo(req, res).then();
   });
 
   //Express Session
-  app.get('/admin', (req, res) => {
-    req.session.login = 'akira'
-    console.log(req.session.login)
-  })
+  app.get("/userID", (req, res) => {
+    promiseID.then((id) => {
+      res.send({
+        msg: id,
+      });
+    });
+  });
 
   // Upload Info User
-  app.post('/api/register', (req, res) => {
-    register.createUser(req, res)
-  })
-
-}
+  app.post("/api/register", (req, res) => {
+    register.createUser(req, res);
+  });
+};

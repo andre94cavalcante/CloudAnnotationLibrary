@@ -1,20 +1,24 @@
-const mongoose = require('../mongoDB/mongoose');
-const app = require('../../server');
-const http = require('http')
-const express = require('express');
-const session = require('express-session')
+const mongoose = require("../mongoDB/mongoose");
+const app = require("../../server");
+const http = require("http");
+const express = require("express");
+// const session = require("express-session");
+const fetch = require("node-fetch");
 
-const port = process.env.PORT || 'http://localhost:5000';
+const port = process.env.PORT || "http://localhost:5000";
+
+let sessionID = "null";
 
 async function fetchUserInfo(req, res) {
-  let authorizedId = await mongoose.matchUserInfo(req.body).then()
-  req.session.userID = authorizedId
-  console.log(req.session)
-  http.get(port + '/api/users', {
-    id: authorizedId
-  })
+  console.log("Info received from frontend");
+  console.log(req.body);
+  await mongoose.matchUserInfo(req.body).then((id) => {
+    sessionID = id.toString();
+  });
+  return sessionID;
 }
 
 module.exports = {
   fetchUserInfo: fetchUserInfo,
-}
+  sessionID: sessionID,
+};
