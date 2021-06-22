@@ -1,31 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
+  constructor(public http: HttpClient) {}
 
-  constructor() { }
+  readonly apiUrl = 'http://localhost:5000/api/';
+  // readonly searchUrl = this.apiUrl + 'search';
 
-  ngOnInit(): void {
-    // const clearIcon = document.getElementById("clear");
-    // this.searchText = (<HTMLInputElement>event.target).value;
+  info = {
+    keywordSearch: '',
+  };
 
-    // searchBar.addEventListener("keyup", () => {
-    //   if (searchBar.val() && clearIcon.style.visibility != "visible") {
-    //     clearIcon.style.visibility = "visible";
-    //   } else if (!searchBar.val()) {
-    //     clearIcon.style.visibility = "hidden";
-    //   }
-    // });
+  search = () => {
+    this.reloadRecomendation();
+    this.info.keywordSearch = '';
+  };
 
-    // clearIcon.addEventListener("click", () => {
-    //   searchBar.val() = "";
-    //   clearIcon.style.visibility = "hidden";
-    // })
+  clear = () => {
+    this.info.keywordSearch = '';
+  };
 
-  }
+  reloadRecomendation = () => {
+    const searchUrl = this.apiUrl + 'search';
+    console.log(this.info.keywordSearch);
+    return this.http.post(searchUrl, this.info).subscribe((responseData) => {});
+  };
 
+  ngOnInit(): void {}
 }

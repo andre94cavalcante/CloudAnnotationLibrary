@@ -42,7 +42,7 @@ export class UploadComponent implements OnInit {
     subject: '',
     tags: [],
     pages: 0,
-    tempQueueImgs: 0,
+    // tempQueueImgs: 0,
   };
 
   tagsToSlice = '';
@@ -69,7 +69,7 @@ export class UploadComponent implements OnInit {
       subject: '',
       tags: [],
       pages: 0,
-      tempQueueImgs: 0,
+      // tempQueueImgs: 0,
     };
     this.tagsToSlice = '';
   };
@@ -97,7 +97,7 @@ export class UploadComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       this.fileQueue.push(file.file.name);
       console.log(this.fileQueue);
-      this.notebook.tempQueueImgs = this.fileQueue.length;
+      // this.notebook.tempQueueImgs = this.fileQueue.length;
       console.log(this.notebook);
       file.withCredentials = false;
       this.emptyQueue();

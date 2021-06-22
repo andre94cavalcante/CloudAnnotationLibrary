@@ -63,12 +63,15 @@ async function findNotebook(info) {
 }
 
 async function updatePages(info) {
-  const note = await Notebook.findOneAndUpdate(
+  const notebookImagesArr = await Notebook.find({
+    projectName: info.projectName,
+  });
+  const note = await Notebook.update(
     {
       projectName: info.projectName,
     },
     {
-      pages: info.pages,
+      $set: { pages: info.pages },
     }
   );
 }
@@ -96,6 +99,7 @@ async function newUser(info) {
   const user = await new User(info);
   user.isAdmin = false;
   user.follow = [];
+  // user.password = await hashJs.createHash(info.password).then();
   user
     .save()
     .then((user) => {
@@ -117,11 +121,9 @@ async function matchUserInfo(info) {
     if (user[0].password === info.password) {
       console.log("Login Successful");
       sessionID = user[0]._id.toString();
-      await hashJs.createHash(sessionID).then((hash) => {
-        hashID = hash;
-      });
-      console.log("hashid", hashID);
-      return user[0]._id;
+      // hashID = await hashJs.createHash(sessionID).then();
+      // console.log("Hash ID:", hashID);
+      return sessionID;
     } else {
       console.log("Wrong Password");
       return "Senha Incorreta";

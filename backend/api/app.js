@@ -82,16 +82,32 @@
 // // module.exports = app
 
 const imageUploader = require("./imageUploader");
+const pdfDownloaer = require("./pdfDownloader");
 const infoUploader = require("./infoUploader");
 const login = require("./login");
 const register = require("./register");
 
 let promiseID = "null";
+let resultRegistration = "null";
+
+const configAWS = require("./config"),
+  fs = require("fs"),
+  AWS = require("aws-sdk");
+
+// AWS Info
+AWS.config.update({
+  secretAccessKey: configAWS.AWS_SECRET_ACCESS_KEY,
+  accessKeyId: configAWS.AWS_ACCESS_KEY,
+  region: configAWS.AWS_DEFAULT_REGION,
+});
+
+S3_BUCKET = configAWS.BUCKET_NAME;
+const s3 = new AWS.S3();
 
 module.exports = (app) => {
   // Image Upload Functions
   app.get("/api", (req, res) => {
-    imageUploader.fileCatcher(res);
+    res.send("You did not say the magic word");
   });
 
   // POST Image File
@@ -128,6 +144,15 @@ module.exports = (app) => {
 
   // Upload Info User
   app.post("/api/register", (req, res) => {
-    register.createUser(req, res);
+    resultRegistration = register.createUser(req, res);
+  });
+
+  // Test Download AWS
+  app.get("/download", (req, res) => {
+    pdfDownloaer.downloadTest(res);
+  });
+
+  app.post("/api/search", (req, res) => {
+    console.log(req.body);
   });
 };

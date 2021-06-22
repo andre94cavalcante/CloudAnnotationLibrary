@@ -24,22 +24,22 @@ export class LoginScreenComponent implements OnInit {
     password: '',
   };
 
-  authorizedId = 'null';
+  authorizedID = 'null';
 
   login = () => {
     const userUrl = this.apiUrl + 'users';
     this.http.post(userUrl, this.user).subscribe((responseData) => {});
 
     this.http.get<any>('http://localhost:5000/userID').subscribe((data) => {
-      this.authorizedId = data.msg;
-      console.log('Session ID hash', data.msg);
+      this.authorizedID = data.msg;
+      console.log('Session Hash ID', this.authorizedID);
 
       if (
-        this.authorizedId.toString() === 'null' ||
-        this.authorizedId.toString() === 'E-mail não Cadastrado' ||
-        this.authorizedId.toString() === 'Senha Incorreta'
+        this.authorizedID.toString() === 'null' ||
+        this.authorizedID.toString() === 'E-mail não Cadastrado' ||
+        this.authorizedID.toString() === 'Senha Incorreta'
       ) {
-        this.toastr.error(this.authorizedId);
+        this.toastr.error(this.authorizedID);
         this.user.password = '';
       } else {
         this.user = {
