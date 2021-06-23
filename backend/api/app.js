@@ -116,7 +116,6 @@ module.exports = (app) => {
   // app.post('/api/imgUpload', imageUploader.uploadLocal.single('image'), function (req, res) {
   //   imageUploader.imageUpload(req, res);
   // });
-
   app.post(
     "/api/imgUpload",
     imageUploader.uploadAWS.single("image"),
@@ -131,12 +130,12 @@ module.exports = (app) => {
   });
 
   // Get Login Info
-  app.post("/api/users", (req, res) => {
+  app.post("/api/login", (req, res) => {
     promiseID = login.fetchUserInfo(req, res);
   });
 
   //Send ID Hash
-  app.get("/userID", (req, res) => {
+  app.get("/api/login", (req, res) => {
     promiseID.then((id) => {
       res.send({
         msg: id,
@@ -144,9 +143,16 @@ module.exports = (app) => {
     });
   });
 
-  // Upload Info User
+  // Upload Registration Info
   app.post("/api/register", (req, res) => {
     resultRegistration = register.createUser(req, res);
+  });
+
+  // Receive Confirmation Register
+  app.get("/api/register", (req, res) => {
+    resultRegistration.then((confirmation) => {
+      res.send(confirmation);
+    });
   });
 
   // Test Download AWS
@@ -154,6 +160,7 @@ module.exports = (app) => {
     pdfDownloaer.downloadPdf(req);
   });
 
+  // Receive PDF
   app.get("/api/download", (req, res) => {});
 
   //Search keyword in DB
@@ -161,6 +168,7 @@ module.exports = (app) => {
     promiseFoundNotesArr = search.searchkeyword(req, res);
   });
 
+  // Receive results from keyword Search
   app.get("/api/search", (req, res) => {
     promiseFoundNotesArr.then((arrNotes) => {
       res.send(arrNotes);

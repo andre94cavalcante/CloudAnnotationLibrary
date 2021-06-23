@@ -27,10 +27,10 @@ export class LoginScreenComponent implements OnInit {
   authorizedID = 'null';
 
   login = () => {
-    const userUrl = this.apiUrl + 'users';
+    const userUrl = this.apiUrl + 'login';
     this.http.post(userUrl, this.user).subscribe((responseData) => {});
 
-    this.http.get<any>('http://localhost:5000/userID').subscribe((data) => {
+    this.http.get<any>('http://localhost:5000/api/login').subscribe((data) => {
       this.authorizedID = data.msg;
       console.log('Session Hash ID', this.authorizedID);
 

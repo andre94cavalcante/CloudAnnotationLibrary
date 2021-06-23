@@ -47,8 +47,7 @@ async function getImgFiles(req) {
       if (err) {
         console.log("File missing", i);
       }
-      console.log(data);
-      fs.writeFileSync(`${homePath}${fileName}`, data.Body);
+      fs.writeFileSync(`${homePath}${arrImgFiles[i]}`, data.Body);
     });
   }
   console.log(arrImgFiles);
