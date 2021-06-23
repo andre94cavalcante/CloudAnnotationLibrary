@@ -20,7 +20,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthService } from './login-screen/auth.service';
 import { RegisterScreenComponent } from './register-screen/register-screen.component';
 import { ApiUsersComponent } from './api-users/api-users.component';
-import { NotebooksListComponent } from './notebooks-list/notebooks-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginScreenComponent },
@@ -44,7 +43,6 @@ const appRoutes: Routes = [
     LoginScreenComponent,
     RegisterScreenComponent,
     ApiUsersComponent,
-    NotebooksListComponent,
   ],
   imports: [
     BrowserModule,

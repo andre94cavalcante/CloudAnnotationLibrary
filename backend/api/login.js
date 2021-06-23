@@ -1,7 +1,4 @@
 const mongoose = require("../mongoDB/mongoose");
-const app = require("../../server");
-const http = require("http");
-const express = require("express");
 // const session = require("express-session");
 const fetch = require("node-fetch");
 

@@ -86,9 +86,11 @@ const pdfDownloaer = require("./pdfDownloader");
 const infoUploader = require("./infoUploader");
 const login = require("./login");
 const register = require("./register");
+const search = require("./search");
 
 let promiseID = "null";
 let resultRegistration = "null";
+let promiseFoundNotesArr = "null";
 
 const configAWS = require("./config"),
   fs = require("fs"),
@@ -130,10 +132,10 @@ module.exports = (app) => {
 
   // Get Login Info
   app.post("/api/users", (req, res) => {
-    promiseID = login.fetchUserInfo(req, res).then();
+    promiseID = login.fetchUserInfo(req, res);
   });
 
-  //Express Session
+  //Send ID Hash
   app.get("/userID", (req, res) => {
     promiseID.then((id) => {
       res.send({
@@ -148,11 +150,20 @@ module.exports = (app) => {
   });
 
   // Test Download AWS
-  app.get("/download", (req, res) => {
-    pdfDownloaer.downloadTest(res);
+  app.post("/api/download", (req, res) => {
+    pdfDownloaer.downloadPdf(req);
   });
 
+  app.get("/api/download", (req, res) => {});
+
+  //Search keyword in DB
   app.post("/api/search", (req, res) => {
-    console.log(req.body);
+    promiseFoundNotesArr = search.searchkeyword(req, res);
+  });
+
+  app.get("/api/search", (req, res) => {
+    promiseFoundNotesArr.then((arrNotes) => {
+      res.send(arrNotes);
+    });
   });
 };

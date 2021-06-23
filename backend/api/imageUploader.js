@@ -20,11 +20,14 @@ const s3 = new AWS.S3();
 const path = process.env.HOME + "/Programming/TCC/Actual/backend/uploads";
 
 const fileInfo = {
-  idNotebook: "NoFetch",
+  notebook: "NoFetch",
+  newPages: "",
+  i: 1,
 };
 
-const getIdNotebook = (id) => {
-  fileInfo.idNotebook = id;
+const geNotebookInfo = (note, newPages) => {
+  fileInfo.notebook = note;
+  fileInfo.newPages = newPages;
 };
 
 const fileNameFunc = (file) => {
@@ -32,8 +35,13 @@ const fileNameFunc = (file) => {
   if (extension === "jpeg") {
     extension = "jpg";
   }
-  let timeStamp = new Date().getTime().toString();
-  const fileName = fileInfo.idNotebook + "-" + timeStamp + "." + extension;
+  let page = fileInfo.notebook.pages - fileInfo.newPages + fileInfo.i;
+  const fileName = fileInfo.notebook._id + "-" + page + "." + extension;
+  console.log(page);
+  fileInfo.i++;
+  if (fileInfo.i > fileInfo.newPages) {
+    fileInfo.i = 1;
+  }
   return fileName;
 };
 
@@ -44,7 +52,7 @@ let uploadAWS = multer({
     key: function (req, file, cb) {
       setTimeout(() => {
         cb(null, fileNameFunc(file));
-      }, 500);
+      }, 700);
     },
   }),
 });
@@ -79,6 +87,6 @@ const imageUpload = (req, res) => {
 module.exports = {
   uploadAWS: uploadAWS,
   imageUpload: imageUpload,
-  getIdNotebook: getIdNotebook,
+  geNotebookInfo: geNotebookInfo,
   // uploadLocal: uploadLocal,
 };

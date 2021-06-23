@@ -34,8 +34,7 @@ const Notebook = mongoose.model("notebook", {
 
 async function newNotebook(info) {
   const note = await new Notebook(info);
-  // console.log("mongoose ID", login.sessionID);
-  note.author = "60886644330b137eb3c72d66";
+  note.author = sessionID;
   note.pages = info.tempQueueImgs;
   note
     .save()
@@ -50,30 +49,61 @@ async function newNotebook(info) {
 }
 
 async function findNotebook(info) {
-  const note = await Notebook.find({
+  const arrNotes = await Notebook.find({
     projectName: info.projectName,
+    author: sessionID,
   }).then();
-  if (note.length >= 1) {
+  if (arrNotes.length >= 1) {
+    let note = arrNotes[0];
     console.log("Found Notebook object in the DB:");
-    console.log(note[0]);
+    console.log(note);
+    let newPages = note.pages + info.tempQueueImgs;
+    await Notebook.updateOne(
+      {
+        _id: note._id,
+      },
+      {
+        $set: { pages: newPages },
+      }
+    ).then();
+    note = await Notebook.findOne({
+      _id: note._id,
+    }).then();
+    console.log("Notebook with pages updated:");
+    console.log(note);
     return note;
   } else {
     console.log("No Notebook with this name");
+    return undefined;
   }
 }
 
-async function updatePages(info) {
-  const notebookImagesArr = await Notebook.find({
-    projectName: info.projectName,
-  });
-  const note = await Notebook.update(
-    {
-      projectName: info.projectName,
-    },
-    {
-      $set: { pages: info.pages },
+async function findKeyword(info) {
+  const arrProjectName = await Notebook.find({
+    projectName: info.keywordSearch,
+  }).then();
+  const arrSubject = await Notebook.find({
+    subject: info.keywordSearch,
+  }).then();
+  const arrTags = await Notebook.find({
+    tags: info.keywordSearch,
+  }).then();
+  let arrSearchs = [arrProjectName, arrSubject, arrTags];
+  let arrNotebooks = [];
+  (() => {
+    for (i = 0; i < arrSearchs.length; i++) {
+      arrSearchs[i].map((note) => {
+        arrNotebooks.push(note);
+      });
     }
-  );
+  })();
+  if (arrNotebooks.length >= 1) {
+    console.log("Keyword found in the DB:");
+    console.log(arrNotebooks);
+    return arrNotebooks;
+  } else {
+    console.log("No Notebook with this Keyword");
+  }
 }
 
 const User = mongoose.model("user", {
@@ -137,7 +167,7 @@ async function matchUserInfo(info) {
 module.exports = {
   newNotebook: newNotebook,
   findNotebook: findNotebook,
-  updatePages: updatePages,
+  findKeyword: findKeyword,
   newUser: newUser,
   matchUserInfo: matchUserInfo,
 };
