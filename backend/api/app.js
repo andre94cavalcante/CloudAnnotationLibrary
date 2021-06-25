@@ -125,12 +125,15 @@ module.exports = (app) => {
   );
 
   // Upload Info Notebook
-  app.post("/api/infoUpload", (req, res, next) => {
-    infoUploader.getInfo(req, res);
-  });
+  app.post(
+    "http://tcc-andre.herokuapp.com/api/infoUpload",
+    (req, res, next) => {
+      infoUploader.getInfo(req, res);
+    }
+  );
 
   // Get Login Info
-  app.post("/api/login", (req, res) => {
+  app.post("http://tcc-andre.herokuapp.com/api/login", (req, res) => {
     promiseID = login.fetchUserInfo(req, res);
   });
 

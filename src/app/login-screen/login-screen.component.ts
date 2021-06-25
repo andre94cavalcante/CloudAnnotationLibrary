@@ -17,7 +17,9 @@ export class LoginScreenComponent implements OnInit {
     private router: Router
   ) {}
 
-  readonly apiUrl = 'http://localhost:5000/api/';
+  // readonly apiUrl = 'http://localhost:5000/api/';
+
+  readonly apiUrl = 'http://tcc-andre.herokuapp.com/';
 
   user = {
     email: '',
@@ -30,7 +32,7 @@ export class LoginScreenComponent implements OnInit {
     const userUrl = this.apiUrl + 'login';
     this.http.post(userUrl, this.user).subscribe((responseData) => {});
 
-    this.http.get<any>('http://localhost:5000/api/login').subscribe((data) => {
+    this.http.get<any>(userUrl).subscribe((data) => {
       this.authorizedID = data.msg;
       console.log('Session Hash ID', this.authorizedID);
 
