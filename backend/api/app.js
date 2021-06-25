@@ -125,12 +125,9 @@ module.exports = (app) => {
   );
 
   // Upload Info Notebook
-  app.post(
-    "http://tcc-andre.herokuapp.com/api/infoUpload",
-    (req, res, next) => {
-      infoUploader.getInfo(req, res);
-    }
-  );
+  app.post("/api/infoUpload", (req, res, next) => {
+    infoUploader.getInfo(req, res);
+  });
 
   // Get Login Info
   app.post("http://tcc-andre.herokuapp.com/api/login", (req, res) => {
@@ -138,7 +135,7 @@ module.exports = (app) => {
   });
 
   //Send ID Hash
-  app.get("/api/login", (req, res) => {
+  app.get("http://tcc-andre.herokuapp.com/api/login", (req, res) => {
     promiseID.then((id) => {
       res.send({
         msg: id,
