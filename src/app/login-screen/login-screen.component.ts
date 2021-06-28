@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-screen',
@@ -32,7 +32,7 @@ export class LoginScreenComponent implements OnInit {
 
   login = () => {
     console.log(environment);
-    console.log(process.env.PORT);
+    console.log(process.env);
     if (this.user.email !== '' && this.user.password !== '') {
       const userUrl = this.apiUrl + 'login';
       this.http.post(userUrl, this.user).subscribe((responseData) => {});
