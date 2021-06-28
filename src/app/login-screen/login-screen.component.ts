@@ -17,9 +17,9 @@ export class LoginScreenComponent implements OnInit {
     private router: Router
   ) {}
 
-  // readonly apiUrl = 'http://localhost:5000/api/';
+  readonly apiUrl = 'http://localhost:5000/api/';
 
-  readonly apiUrl = 'http://tcc-andre.herokuapp.com/';
+  // readonly apiUrl = 'http://tcc-andre.herokuapp.com/';
 
   user = {
     email: '',
@@ -29,29 +29,32 @@ export class LoginScreenComponent implements OnInit {
   authorizedID = 'null';
 
   login = () => {
-    const userUrl = this.apiUrl + 'login';
-    this.http.post(userUrl, this.user).subscribe((responseData) => {});
+    if (this.user.email !== '' && this.user.password !== '') {
+      const userUrl = this.apiUrl + 'login';
+      this.http.post(userUrl, this.user).subscribe((responseData) => {});
 
-    this.http.get<any>(userUrl).subscribe((data) => {
-      this.authorizedID = data.msg;
-      console.log('Session Hash ID', this.authorizedID);
+      this.http.get<any>(userUrl).subscribe((data) => {
+        this.authorizedID = data.msg;
+        console.log('Session Hash ID', this.authorizedID);
 
-      if (
-        this.authorizedID.toString() === 'null' ||
-        this.authorizedID.toString() === 'E-mail não Cadastrado' ||
-        this.authorizedID.toString() === 'Senha Incorreta'
-      ) {
-        this.toastr.error(this.authorizedID);
-        this.user.password = '';
-      } else {
-        this.user = {
-          email: '',
-          password: '',
-        };
+        if (
+          this.authorizedID.toString() === 'null' ||
+          this.authorizedID.toString() === 'Dados Incorretos'
+        ) {
+          this.toastr.error(this.authorizedID);
+          this.user.password = '';
+        } else {
+          this.user = {
+            email: '',
+            password: '',
+          };
 
-        this.router.navigate(['/home']);
-      }
-    });
+          this.router.navigate(['/home']);
+        }
+      });
+    } else {
+      this.toastr.warning('Preencha os Campos');
+    }
   };
 
   register = () => {

@@ -156,11 +156,11 @@ async function matchUserInfo(info) {
       return sessionID;
     } else {
       console.log("Wrong Password");
-      return "Senha Incorreta";
+      return "Dados Incorretos";
     }
   } else {
     console.log("Unregistered");
-    return "E-mail não Cadastrado";
+    return "Dados Incorretos";
   }
 }
 
