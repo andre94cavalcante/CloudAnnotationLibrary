@@ -4,6 +4,8 @@ import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
+import { environment } from 'src/environments/environment.prod';
+
 @Component({
   selector: 'app-login-screen',
   templateUrl: './login-screen.component.html',
@@ -17,8 +19,7 @@ export class LoginScreenComponent implements OnInit {
     private router: Router
   ) {}
 
-  // readonly apiUrl = 'http://localhost:5000/api/';
-  readonly apiUrl = 'http://localhost:10986/api/';
+  readonly apiUrl = 'http://localhost:5000/api/';
 
   // readonly apiUrl = 'http://tcc-andre.herokuapp.com/';
 
@@ -30,6 +31,7 @@ export class LoginScreenComponent implements OnInit {
   authorizedID = 'null';
 
   login = () => {
+    console.log(environment);
     if (this.user.email !== '' && this.user.password !== '') {
       const userUrl = this.apiUrl + 'login';
       this.http.post(userUrl, this.user).subscribe((responseData) => {});
