@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: `${process.env.PORT}` || 'http://localhost:5000/',
+  PORT: `${process.env.PORT}` || 'http://localhost:5000/',
 };
 
 /*
