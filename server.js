@@ -53,6 +53,8 @@ app.use(
     saveUninitialized: true,
     cookie: {
       secure: false,
+      secure: true,
+      maxAge: 60000,
     },
   })
 );
@@ -67,8 +69,4 @@ app.get("/*", (req, res) => {
   );
 });
 
-app.listen(port, () =>
-  console.log(
-    `Server is listening on port ${port}! and process.env ${process.env.PORT}`
-  )
-);
+app.listen(port, () => console.log(`Server is listening on port ${port}!`));

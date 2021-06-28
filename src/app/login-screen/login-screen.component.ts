@@ -32,6 +32,7 @@ export class LoginScreenComponent implements OnInit {
 
   login = () => {
     console.log(environment);
+    console.log(process.env.PORT);
     if (this.user.email !== '' && this.user.password !== '') {
       const userUrl = this.apiUrl + 'login';
       this.http.post(userUrl, this.user).subscribe((responseData) => {});
