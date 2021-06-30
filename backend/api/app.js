@@ -82,7 +82,7 @@
 // // module.exports = app
 
 const imageUploader = require("./imageUploader");
-const pdfDownloaer = require("./pdfDownloader");
+const pdfDownloader = require("./pdfDownloader");
 const infoUploader = require("./infoUploader");
 const login = require("./login");
 const register = require("./register");
@@ -91,6 +91,7 @@ const search = require("./search");
 let promiseID = "null";
 let resultRegistration = "null";
 let promiseFoundNotesArr = "null";
+let pdfPath = "";
 
 const configAWS = require("./config"),
   fs = require("fs"),
@@ -157,11 +158,23 @@ module.exports = (app) => {
 
   // Test Download AWS
   app.post("/api/download", (req, res) => {
-    pdfDownloaer.downloadPdf(req);
+    pdfPath = pdfDownloader.downloadPdf(req);
   });
 
   // Receive PDF
-  app.get("/api/download", (req, res) => {});
+  app.get("/api/download", (req, res) => {
+    pdfPath.then((path) => {
+      res.download(path);
+    });
+  });
+
+  //Delete Temp PDF
+  app.post("/api/download/done", (req, res) => {
+    pdfPath.then((path) => {
+      pdfDownloader.deleteFile(path);
+      res.end();
+    });
+  });
 
   //Search keyword in DB
   app.post("/api/search", (req, res) => {

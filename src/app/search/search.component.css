@@ -1,6 +1,5 @@
 .wrapper {
   position: relative;
-  display: flex;
   min-width: 100px;
   max-width: 1000px;
   width: 90%;
@@ -42,18 +41,15 @@
 }
 
 .items-box {
-  position: absolute;
-  text-align: center;
-  min-width: 100px;
-  max-width: 1000px;
-  left: 15%;
   width: 90%;
   margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .item-box {
-  display: block;
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   width: 70%;
 }
 
@@ -70,32 +66,23 @@
 ul {
   margin: 0;
   padding: 0;
-  text-align: left;
   text-decoration: none;
   list-style: none;
 }
 
-li {
-  margin: 0;
-  padding: 0;
-  width: 70%;
-}
-
 .projectName {
   font-size: 30px;
-  text-align: center;
+  text-align: left;
   font-weight: bolder;
 }
 
 .subject {
   font-size: 20px;
-  text-align: center;
 }
 
 .downloadIcon {
-  display: inline-block;
   position: absolute;
-  right: 100px;
+  right: 20%;
   margin-top: 40px;
   vertical-align: middle;
   width: 45px;

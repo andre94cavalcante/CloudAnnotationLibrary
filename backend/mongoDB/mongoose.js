@@ -80,13 +80,13 @@ async function findNotebook(info) {
 
 async function findKeyword(info) {
   const arrProjectName = await Notebook.find({
-    projectName: info.keywordSearch,
+    projectName: { $regex: info.keywordSearch },
   }).then();
   const arrSubject = await Notebook.find({
-    subject: info.keywordSearch,
+    subject: { $regex: info.keywordSearch },
   }).then();
   const arrTags = await Notebook.find({
-    tags: info.keywordSearch,
+    tags: { $regex: info.keywordSearch },
   }).then();
   let arrSearchs = [arrProjectName, arrSubject, arrTags];
   let arrNotebooks = [];
@@ -103,6 +103,7 @@ async function findKeyword(info) {
     return arrNotebooks;
   } else {
     console.log("No Notebook with this Keyword");
+    return undefined;
   }
 }
 
