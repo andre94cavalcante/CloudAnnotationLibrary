@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  PORT: `${process.env.PORT}` || 'http://localhost:5000/',
+  PORT: '',
 };
 
 /*
