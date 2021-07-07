@@ -131,12 +131,12 @@ module.exports = (app) => {
   });
 
   // Get Login Info
-  app.post("http://tcc-andre.herokuapp.com/api/login", (req, res) => {
+  app.post("/api/login", (req, res) => {
     promiseID = login.fetchUserInfo(req, res);
   });
 
   //Send ID Hash
-  app.get("http://tcc-andre.herokuapp.com/api/login", (req, res) => {
+  app.get("/api/login", (req, res) => {
     promiseID.then((id) => {
       res.send({
         msg: id,
