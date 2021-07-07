@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-upload',
@@ -11,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UploadComponent implements OnInit {
   constructor(private toastr: ToastrService, public http: HttpClient) {}
 
-  readonly apiUrl = 'http://localhost:5000/api/';
+  // readonly apiUrl = 'http://localhost:5000/api/';
+  readonly apiUrl = environment.apiURL;
 
   public uploader: FileUploader = new FileUploader({
     url: this.apiUrl + 'imgUpload',

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -13,7 +14,8 @@ export class SearchComponent implements OnInit {
   observable: Observable<number>;
   constructor(public http: HttpClient, private toastr: ToastrService) {}
 
-  readonly apiUrl = 'http://localhost:5000/api/';
+  // readonly apiUrl = 'http://localhost:5000/api/';
+  readonly apiUrl = environment.apiURL;
   readonly searchUrl = this.apiUrl + 'search';
   readonly downloadUrl = this.apiUrl + 'download';
 

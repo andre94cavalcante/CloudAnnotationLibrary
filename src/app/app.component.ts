@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { environment } from 'src/environments/environment';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +9,5 @@ import { environment } from 'src/environments/environment';
 export class AppComponent implements OnInit {
   constructor(public http: HttpClient) {}
 
-  ngOnInit(): void {
-    console.log('a porta agora é:', environment.PORT);
-  }
+  ngOnInit(): void {}
 }

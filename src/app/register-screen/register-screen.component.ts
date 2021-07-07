@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-register-screen',
   templateUrl: './register-screen.component.html',
@@ -15,7 +17,8 @@ export class RegisterScreenComponent implements OnInit {
     private router: Router
   ) {}
 
-  readonly apiUrl = 'http://localhost:5000/api/';
+  // readonly apiUrl = 'http://localhost:5000/api/';
+  readonly apiUrl = environment.apiURL;
 
   user = {
     name: '',

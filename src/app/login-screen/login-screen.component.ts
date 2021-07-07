@@ -21,7 +21,7 @@ export class LoginScreenComponent implements OnInit {
 
   // readonly apiUrl = 'http://localhost:5000/api/';
 
-  readonly apiUrl = 'https://tcc-andre.herokuapp.com/api/';
+  readonly apiUrl = environment.apiURL;
 
   user = {
     email: '',

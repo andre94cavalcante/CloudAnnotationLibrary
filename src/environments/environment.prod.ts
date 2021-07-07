@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  PORT: 0,
+  apiURL: 'https://tcc-andre.herokuapp.com/api/',
 };
