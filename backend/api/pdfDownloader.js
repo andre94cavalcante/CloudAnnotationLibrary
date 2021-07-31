@@ -48,7 +48,7 @@ async function getFilesFromAWS(fileName) {
       arrFileNames.push(`${homePath}${fileName}`);
     });
   } catch (err) {
-    console.log("File missing", fileName);
+    console.log("File missing.", fileName);
   }
 }
 
