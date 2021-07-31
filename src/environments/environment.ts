@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://tcc-andre.herokuapp.com/api/',
+  apiURL: 'http://localhost:5000/api/',
 };
 
 /*

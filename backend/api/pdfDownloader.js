@@ -63,6 +63,7 @@ async function generatePDF(projectName) {
   try {
     let pdfPath = `${homePath}${projectName}.pdf`;
     imagesToPdf(arrFileNames, pdfPath);
+    console.log(pdfPath);
     return pdfPath;
   } catch (err) {
     console.log("Unable to save file:", `${projectName}.pdf`);
