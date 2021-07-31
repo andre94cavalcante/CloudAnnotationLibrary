@@ -13,8 +13,9 @@ AWS.config.update({
 S3_BUCKET = configAWS.BUCKET_NAME;
 const s3 = new AWS.S3();
 
-const homePath =
-  process.env.HOME + "/Programming/TCC/Actual/backend/tempDownload/";
+// const homePath =
+//   process.env.HOME + "/Programming/TCC/Actual/backend/tempDownload/";
+const homePath = "/Programming/TCC/Actual/backend/tempDownload/";
 
 let arrFileNames = [];
 
