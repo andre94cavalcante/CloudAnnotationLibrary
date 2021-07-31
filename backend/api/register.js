@@ -6,7 +6,7 @@ async function createUser(req, res) {
   console.log("Info received from frontend:");
   console.log(req.body);
   const userExists = await mongoose.matchUserInfo(req.body).then();
-  if (userExists === "E-mail não Cadastrado") {
+  if (userExists === "Dados Incorretos") {
     await mongoose.newUser(req.body).then();
     return true;
   } else {
