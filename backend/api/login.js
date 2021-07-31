@@ -1,6 +1,5 @@
 const mongoose = require("../mongoDB/mongoose");
 // const session = require("express-session");
-const fetch = require("node-fetch");
 
 const port = process.env.PORT || "http://localhost:5000";
 

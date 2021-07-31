@@ -26,6 +26,7 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'user', component: UserComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'logout', component: LoginScreenComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: 'registration', component: RegisterScreenComponent },
   { path: 'api/users', component: ApiUsersComponent },

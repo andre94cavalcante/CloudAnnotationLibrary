@@ -156,6 +156,8 @@ module.exports = (app) => {
     });
   });
 
+  let pdfPath = "";
+
   // Test Download AWS
   app.post("/api/download", (req, res) => {
     pdfPath = pdfDownloader.downloadPdf(req);

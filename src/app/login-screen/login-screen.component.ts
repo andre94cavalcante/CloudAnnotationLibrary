@@ -64,6 +64,4 @@ export class LoginScreenComponent implements OnInit {
   register = () => {
     this.router.navigate(['/registration']);
   };
-
-  ngOnInit(): void {}
 }

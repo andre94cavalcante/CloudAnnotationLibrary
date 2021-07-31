@@ -17,7 +17,8 @@ S3_BUCKET = configAWS.BUCKET_NAME;
 const s3 = new AWS.S3();
 
 // File upload settings
-const path = process.env.HOME + "/Programming/TCC/Actual/backend/uploads";
+// const path = process.env.HOME + "/Programming/TCC/Actual/backend/uploads";
+const path = "/Programming/TCC/Actual/backend/uploads";
 
 const fileInfo = {
   notebook: "NoFetch",
